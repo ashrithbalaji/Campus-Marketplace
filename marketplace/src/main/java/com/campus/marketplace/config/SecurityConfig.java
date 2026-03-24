@@ -34,6 +34,8 @@ public class SecurityConfig {
                 .requestMatchers("/api/users/**").permitAll() // Added to permit Dashboard updates
                 .requestMatchers("/uploads/**").permitAll() // Added to allow image access
                 .requestMatchers("/api/requests/**").permitAll() // Added for Buying System functionality
+                .requestMatchers("/api/messages/**").permitAll() // Added for messaging functionality
+                .requestMatchers("/api/chat/**").permitAll() // Allow Chatbot to be accessed
                 .anyRequest().authenticated()
             );
 

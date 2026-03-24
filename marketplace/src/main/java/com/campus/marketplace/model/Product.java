@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name = "products")
@@ -25,8 +26,16 @@ public class Product {
     @Column(nullable = false)
     private BigDecimal price;
     
-    @Column(name = "image_url")
-    private String imageUrl;
+    @Column(nullable = false)
+    private String category;
+    
+    @ElementCollection
+    @CollectionTable(name = "product_images", joinColumns = @JoinColumn(name = "product_id"))
+    @Column(name = "image_url", columnDefinition = "TEXT")
+    private List<String> imageUrls;
+
+    @Column(nullable = false)
+    private boolean isSold = false;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "seller_id", nullable = false)
