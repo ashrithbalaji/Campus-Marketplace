@@ -1,0 +1,195 @@
+/* GLOBAL */
+
+body{
+  margin:0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background:#f5f6fa;
+}
+
+/* LOGIN + SIGNUP PAGE */
+
+.login-page,
+.signup-page{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#f5f6fa;
+}
+
+.login-card,
+.signup-card{
+  width:380px;
+  background:white;
+  padding:40px;
+  border-radius:12px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+  text-align:center;
+}
+
+.login-card h2,
+.signup-card h2{
+  margin-bottom:20px;
+}
+
+/* INPUTS */
+
+.login-card input,
+.signup-card input{
+  width:100%;
+  padding:12px;
+  margin-top:12px;
+  border:1px solid #ddd;
+  border-radius:6px;
+  font-size:14px;
+}
+
+/* BRANCH + YEAR ROW */
+
+.row{
+  display:flex;
+  gap:10px;
+}
+
+.row input{
+  flex:1;
+}
+
+/* BUTTON */
+
+.login-card button,
+.signup-card button{
+  width:100%;
+  padding:12px;
+  margin-top:18px;
+  border:none;
+  border-radius:6px;
+  background:black;
+  color:white;
+  font-size:15px;
+  cursor:pointer;
+}
+
+.login-card button:hover,
+.signup-card button:hover{
+  background:#333;
+}
+
+/* LINKS */
+
+.signup-link{
+  margin-top:15px;
+  color:#007bff;
+  cursor:pointer;
+}
+
+/* ERROR TEXT */
+
+.error{
+  margin-top:10px;
+  color:red;
+  font-size:14px;
+}
+
+/* ========================= */
+/* MARKETPLACE PAGE */
+/* ========================= */
+
+.marketplace-container{
+  padding:30px 50px;
+}
+
+/* NAVBAR */
+
+.navbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 30px;
+  background:white;
+  border-radius:10px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.06);
+}
+
+.navbar h2{
+  margin:0;
+}
+
+/* SELL BUTTON */
+
+.sell-btn{
+  padding:10px 18px;
+  border:none;
+  border-radius:6px;
+  background:black;
+  color:white;
+  cursor:pointer;
+}
+
+.sell-btn:hover{
+  background:#333;
+}
+
+/* SUBTITLE */
+
+.subtitle{
+  margin-top:20px;
+  color:#666;
+}
+
+/* PRODUCT GRID */
+
+.products-grid{
+  margin-top:30px;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+  gap:25px;
+}
+
+/* PRODUCT CARD */
+
+.product-card{
+  background:white;
+  border-radius:10px;
+  overflow:hidden;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+  transition:0.2s;
+}
+
+.product-card:hover{
+  transform:translateY(-5px);
+}
+
+/* PRODUCT IMAGE */
+
+.product-image{
+  height:160px;
+  background:#eee;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:40px;
+}
+
+/* PRODUCT INFO */
+
+.product-info{
+  padding:15px;
+}
+
+.product-info h4{
+  margin:0;
+  font-size:18px;
+}
+
+.product-info p{
+  margin:8px 0;
+  color:#666;
+  font-size:14px;
+}
+
+.price{
+  color:#2ecc71;
+  font-weight:bold;
+  font-size:18px;
+}
