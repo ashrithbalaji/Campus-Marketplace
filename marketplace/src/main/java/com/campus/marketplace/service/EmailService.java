@@ -7,11 +7,16 @@ import org.springframework.stereotype.Service;
 
 import java.util.Random;
 
+import org.springframework.beans.factory.annotation.Value;
+
 @Service
 public class EmailService {
 
     @Autowired
     private JavaMailSender mailSender;
+
+    @Value("${spring.mail.username}")
+    private String senderEmail;
 
     public String generateOTP() {
         Random random = new Random();
@@ -32,7 +37,7 @@ public class EmailService {
               SimpleMailMessage message = new SimpleMailMessage();
 
     message.setTo(toEmail);
-    message.setFrom("yourgmail@gmail.com"); // add this (IMPORTANT)
+    message.setFrom(senderEmail);
 
     message.setSubject("Campus Marketplace - Account Verification OTP");
 
