@@ -30,9 +30,24 @@ public class UserService {
             throw new IllegalArgumentException("Password does not meet the required complexity rules (min 8 chars, 1 uppercase, 1 special, 4 numbers).");
         }
 
-        // Check for duplicates
-        if (userRepository.existsByEmail(request.getEmail())) {
-            throw new IllegalArgumentException("Email already exists.");
+        // Check for duplicates and handle unverified accounts
+        Optional<User> existingUserOpt = userRepository.findByEmail(request.getEmail());
+        if (existingUserOpt.isPresent()) {
+            User existingUser = existingUserOpt.get();
+            if (existingUser.isVerified()) {
+                throw new IllegalArgumentException("Email already exists and is verified. Please log in.");
+            } else {
+                // If the user exists but is not verified, overwrite their info and resend OTP
+                existingUser.setName(request.getName());
+                existingUser.setPassword(passwordEncoder.encode(request.getPassword()));
+                existingUser.setMobileNumber(request.getMobileNumber());
+                
+                String generatedOtp = emailService.generateOTP();
+                existingUser.setOtp(generatedOtp);
+                emailService.sendOTP(existingUser.getEmail(), generatedOtp);
+
+                return userRepository.save(existingUser);
+            }
         }
 
         User user = new User();

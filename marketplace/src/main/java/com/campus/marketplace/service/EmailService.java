@@ -37,13 +37,16 @@ public class EmailService {
     message.setSubject("Campus Marketplace - Account Verification OTP");
 
     message.setText(
-            "Hello,\n\n" +
-            "Welcome to Campus Marketplace!\n\n" +
+            "Hello there, future Campus Marketplace member!\n\n" +
+            "We are absolutely thrilled to welcome you to the Campus Marketplace community! We are building a secure, reliable, and user-friendly platform specifically tailored for students and faculty like you to buy, sell, and connect with ease.\n\n" +
+            "To complete your registration and verify your email address, we need you to provide the following verification code. Please enter it on the verification page to activate your account.\n\n" +
             "Your One-Time Password (OTP) for account verification is: " + otp + "\n\n" +
-            "This OTP is valid for 5 minutes.\n\n" +
-            "Please do not share this OTP with anyone.\n\n" +
-            "If you did not request this, please ignore this email.\n\n" +
-            "Regards,\nCampus Marketplace Team"
+            "For your security, this OTP is valid for the next 5 minutes. Please be aware that our support team will never ask you for your password or your OTP.\n\n" +
+            "Please do not share this OTP with anyone, not even with our staff or other members of the platform.\n\n" +
+            "If you did not attempt to register an account with us or you believe you received this email in error, please disregard it completely. No further action is required on your part.\n\n" +
+            "Thank you for choosing to be a part of our growing community!\n\n" +
+            "Best Regards,\nThe Campus Marketplace Support Team\n" +
+            "Automated Message - Please do not reply directly to this email."
         );
         mailSender.send(message);
         } catch (Exception e) {
