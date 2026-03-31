@@ -1,23 +1,22 @@
 package com.campus.marketplace.service;
 
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
-import com.sendgrid.*;
-import com.sendgrid.helpers.mail.Mail;
-import com.sendgrid.helpers.mail.objects.Content;
-import com.sendgrid.helpers.mail.objects.Email;
-import java.io.IOException;
+import org.springframework.stereotype.Service;
+
 import java.util.Random;
 
 @Service
 public class EmailService {
 
+    @Autowired
+    private JavaMailSender mailSender;
+
     @Value("${spring.mail.username}")
     private String senderEmail;
-
-    @Value("${SENDGRID_API_KEY}")
-    private String sendGridApiKey;
 
     public String generateOTP() {
         Random random = new Random();
@@ -34,10 +33,13 @@ public class EmailService {
         System.out.println("===============================");
 
         try {
-            Email from = new Email(senderEmail);
-            String subject = "Campus Marketplace - Account Verification OTP";
-            Email to = new Email(toEmail);
-            Content content = new Content("text/plain", 
+            SimpleMailMessage message = new SimpleMailMessage();
+
+            message.setTo(toEmail);
+            message.setFrom(senderEmail);
+            message.setSubject("Campus Marketplace - Account Verification OTP");
+
+            message.setText(
                 "Hello there, future Campus Marketplace member!\n\n" +
                 "We are absolutely thrilled to welcome you to the Campus Marketplace community! We are building a secure, reliable, and user-friendly platform specifically tailored for students and faculty like you to buy, sell, and connect with ease.\n\n" +
                 "To complete your registration and verify your email address, we need you to provide the following verification code. Please enter it on the verification page to activate your account.\n\n" +
@@ -49,19 +51,10 @@ public class EmailService {
                 "Best Regards,\nThe Campus Marketplace Support Team\n" +
                 "Automated Message - Please do not reply directly to this email."
             );
-            
-            Mail mail = new Mail(from, subject, to, content);
-            SendGrid sg = new SendGrid(sendGridApiKey);
-            Request request = new Request();
-            
-            request.setMethod(Method.POST);
-            request.setEndpoint("mail/send");
-            request.setBody(mail.build());
-            
-            Response response = sg.api(request);
-            System.out.println("SendGrid Response Code: " + response.getStatusCode());
-        } catch (IOException ex) {
-            System.err.println("Failed to send SendGrid email: " + ex.getMessage());
+
+            mailSender.send(message);
+        } catch (Exception e) {
+            System.err.println("Failed to send real email: " + e.getMessage());
         }
     }
 }
