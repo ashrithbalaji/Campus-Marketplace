@@ -6,6 +6,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;
+import org.springframework.scheduling.annotation.Async;
 
 import org.springframework.beans.factory.annotation.Value;
 
@@ -24,6 +25,7 @@ public class EmailService {
         return String.valueOf(otp);
     }
 
+    @Async
     public void sendOTP(String toEmail, String otp) {
         // In local development without a real SMTP server configured in application.properties,
         // attempting to send via JavaMailSender will throw an exception.
